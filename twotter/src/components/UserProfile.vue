@@ -5,19 +5,28 @@
         <div class="user-profile__admin-badge" v-if="user.isAdmin">Admin</div>
         <div class ="user-profile__follower_count">
         <strong>Followers: </strong> {{followers}}
+        <form class="user-profile__create-twoot">
+          <label for="newTwoot">Create Twoot</label>
+          <textarea id="newTwoot" rows="4"/></form>
         </div>
     </div>
     <div class="user-profile__twoots-wrapper">
-     <div class="user-profile__twoot" v-for="twoot in user.twoots" :key=twoot.id>
-       {{twoot.content}}
+     <TwootItem v-for="twoot in user.twoots" 
+     :key="twoot.id" 
+     :username="user.username" 
+     :twoot="twoot" 
+     @favourite="toggleFavourite"/>
+    
      </div>
-</div>
-</div>
-
+</div> 
 </template>
+
 <script> 
+import TwootItem from "./TwootItem"
+
 export default { 
       name: 'UserProfile',
+      components:{ TwootItem },
  data(){
    return {
      followers: 0,
@@ -47,13 +56,21 @@ export default {
     return `${this.user.firstName} ${this.user.lastName}`;
    }
  },
+ 
  methods: {
   followUser() {
     this.followers++
+  },
+
+  toggleFavourite(id){
+    console.log(`Favourited ${id}`)
+  },
+
+  mounted(){
+    this.followUser();
   }
- },
- mounted(){
-  this.followUser();
+
  }
+
 }
 </script>
