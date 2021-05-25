@@ -2,15 +2,21 @@
 <div class="user-profile">
     <div class="user-profile__user-panel">
     <h1>{{user.username}} - {{fullName}}</h1>
+        <div class="user-profile__admin-badge" v-if="user.isAdmin">Admin</div>
         <div class ="user-profile__follower_count">
         <strong>Followers: </strong> {{followers}}
         </div>
     </div>
+    <div class="user-profile__twoots-wrapper">
+     <div class="user-profile__twoot" v-for="twoot in user.twoots" :key=twoot.id>
+       {{twoot.content}}
+     </div>
 </div>
-<button @click="followUser">Follow</button>
+</div>
+
 </template>
-<script>
-export default {
+<script> 
+export default { 
       name: 'UserProfile',
  data(){
    return {
@@ -21,7 +27,11 @@ export default {
        firstName: 'Chris',
        lastName: 'Spann',
        email: 'spann.chris@gmail.com',
-       isAdmin: false
+       isAdmin: true,
+       twoots: [
+         {id:1, content:"hello"},
+         {id:2, content:"how are you"}
+       ]
      }
    }
  },
