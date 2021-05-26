@@ -35,7 +35,7 @@ export default {
        username: 'cs87',
        firstName: 'Chris',
        lastName: 'Spann',
-       email: 'spann.chris@gmail.com',
+       email: 'fakeemail@email.com',
        isAdmin: true,
        twoots: [
          {id:1, content:"hello"},
